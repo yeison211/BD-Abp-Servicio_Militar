@@ -8,18 +8,23 @@ package Servicio.Militar.Principal.tabla;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
+@Table(catalog = "bd_abp_desarrollo_de_software", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Servicios.findAll", query = "SELECT s FROM Servicios s")
     , @NamedQuery(name = "Servicios.findByIdServicios", query = "SELECT s FROM Servicios s WHERE s.idServicios = :idServicios")
@@ -31,14 +36,18 @@ public class Servicios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer idServicios;
     private String guardia;
     private String imaginaria;
     private String cuarteleros;
     private String fechaDeRealizacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "serviciosidServicios")
-    private List<SolicitarServicio> solicitarServicioList;
+    @JoinTable(name = "soliciatar_servicios", joinColumns = {
+        @JoinColumn(name = "Servicios_idServicios", referencedColumnName = "idServicios")}, inverseJoinColumns = {
+        @JoinColumn(name = "Soldados_idSoldados", referencedColumnName = "idSoldados")})
+    @ManyToMany
+    private List<Soldados> soldadosList;
 
     public Servicios() {
     }
@@ -87,12 +96,12 @@ public class Servicios implements Serializable {
         this.fechaDeRealizacion = fechaDeRealizacion;
     }
 
-    public List<SolicitarServicio> getSolicitarServicioList() {
-        return solicitarServicioList;
+    public List<Soldados> getSoldadosList() {
+        return soldadosList;
     }
 
-    public void setSolicitarServicioList(List<SolicitarServicio> solicitarServicioList) {
-        this.solicitarServicioList = solicitarServicioList;
+    public void setSoldadosList(List<Soldados> soldadosList) {
+        this.soldadosList = soldadosList;
     }
 
     @Override

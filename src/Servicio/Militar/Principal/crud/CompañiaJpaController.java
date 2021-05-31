@@ -7,7 +7,6 @@ package Servicio.Militar.Principal.crud;
 
 import Servicio.Militar.Principal.crud.exceptions.IllegalOrphanException;
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
-import Servicio.Militar.Principal.crud.exceptions.PreexistingEntityException;
 import Servicio.Militar.Principal.tabla.Compañia;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -36,7 +35,7 @@ public class CompañiaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Compañia compañia) throws PreexistingEntityException, Exception {
+    public void create(Compañia compañia) {
         if (compañia.getCuartelesList() == null) {
             compañia.setCuartelesList(new ArrayList<Cuarteles>());
         }
@@ -44,10 +43,10 @@ public class CompañiaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Soldados soldadosid = compañia.getSoldadosid();
-            if (soldadosid != null) {
-                soldadosid = em.getReference(soldadosid.getClass(), soldadosid.getId());
-                compañia.setSoldadosid(soldadosid);
+            Soldados soldadosidSoldados = compañia.getSoldadosidSoldados();
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados = em.getReference(soldadosidSoldados.getClass(), soldadosidSoldados.getIdSoldados());
+                compañia.setSoldadosidSoldados(soldadosidSoldados);
             }
             List<Cuarteles> attachedCuartelesList = new ArrayList<Cuarteles>();
             for (Cuarteles cuartelesListCuartelesToAttach : compañia.getCuartelesList()) {
@@ -56,9 +55,9 @@ public class CompañiaJpaController implements Serializable {
             }
             compañia.setCuartelesList(attachedCuartelesList);
             em.persist(compañia);
-            if (soldadosid != null) {
-                soldadosid.getCompañiaList().add(compañia);
-                soldadosid = em.merge(soldadosid);
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados.getCompañiaList().add(compañia);
+                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             for (Cuarteles cuartelesListCuarteles : compañia.getCuartelesList()) {
                 Compañia oldCompañiaidCompañiaOfCuartelesListCuarteles = cuartelesListCuarteles.getCompañiaidCompañia();
@@ -70,11 +69,6 @@ public class CompañiaJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findCompañia(compañia.getIdCompañia()) != null) {
-                throw new PreexistingEntityException("Compa\u00f1ia " + compañia + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -88,8 +82,8 @@ public class CompañiaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Compañia persistentCompañia = em.find(Compañia.class, compañia.getIdCompañia());
-            Soldados soldadosidOld = persistentCompañia.getSoldadosid();
-            Soldados soldadosidNew = compañia.getSoldadosid();
+            Soldados soldadosidSoldadosOld = persistentCompañia.getSoldadosidSoldados();
+            Soldados soldadosidSoldadosNew = compañia.getSoldadosidSoldados();
             List<Cuarteles> cuartelesListOld = persistentCompañia.getCuartelesList();
             List<Cuarteles> cuartelesListNew = compañia.getCuartelesList();
             List<String> illegalOrphanMessages = null;
@@ -104,9 +98,9 @@ public class CompañiaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            if (soldadosidNew != null) {
-                soldadosidNew = em.getReference(soldadosidNew.getClass(), soldadosidNew.getId());
-                compañia.setSoldadosid(soldadosidNew);
+            if (soldadosidSoldadosNew != null) {
+                soldadosidSoldadosNew = em.getReference(soldadosidSoldadosNew.getClass(), soldadosidSoldadosNew.getIdSoldados());
+                compañia.setSoldadosidSoldados(soldadosidSoldadosNew);
             }
             List<Cuarteles> attachedCuartelesListNew = new ArrayList<Cuarteles>();
             for (Cuarteles cuartelesListNewCuartelesToAttach : cuartelesListNew) {
@@ -116,13 +110,13 @@ public class CompañiaJpaController implements Serializable {
             cuartelesListNew = attachedCuartelesListNew;
             compañia.setCuartelesList(cuartelesListNew);
             compañia = em.merge(compañia);
-            if (soldadosidOld != null && !soldadosidOld.equals(soldadosidNew)) {
-                soldadosidOld.getCompañiaList().remove(compañia);
-                soldadosidOld = em.merge(soldadosidOld);
+            if (soldadosidSoldadosOld != null && !soldadosidSoldadosOld.equals(soldadosidSoldadosNew)) {
+                soldadosidSoldadosOld.getCompañiaList().remove(compañia);
+                soldadosidSoldadosOld = em.merge(soldadosidSoldadosOld);
             }
-            if (soldadosidNew != null && !soldadosidNew.equals(soldadosidOld)) {
-                soldadosidNew.getCompañiaList().add(compañia);
-                soldadosidNew = em.merge(soldadosidNew);
+            if (soldadosidSoldadosNew != null && !soldadosidSoldadosNew.equals(soldadosidSoldadosOld)) {
+                soldadosidSoldadosNew.getCompañiaList().add(compañia);
+                soldadosidSoldadosNew = em.merge(soldadosidSoldadosNew);
             }
             for (Cuarteles cuartelesListNewCuarteles : cuartelesListNew) {
                 if (!cuartelesListOld.contains(cuartelesListNewCuarteles)) {
@@ -175,10 +169,10 @@ public class CompañiaJpaController implements Serializable {
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Soldados soldadosid = compañia.getSoldadosid();
-            if (soldadosid != null) {
-                soldadosid.getCompañiaList().remove(compañia);
-                soldadosid = em.merge(soldadosid);
+            Soldados soldadosidSoldados = compañia.getSoldadosidSoldados();
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados.getCompañiaList().remove(compañia);
+                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             em.remove(compañia);
             em.getTransaction().commit();

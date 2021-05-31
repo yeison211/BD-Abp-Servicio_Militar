@@ -6,7 +6,6 @@
 package Servicio.Militar.Principal.crud;
 
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
-import Servicio.Militar.Principal.crud.exceptions.PreexistingEntityException;
 import Servicio.Militar.Principal.tabla.Infanteria;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -33,27 +32,22 @@ public class InfanteriaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Infanteria infanteria) throws PreexistingEntityException, Exception {
+    public void create(Infanteria infanteria) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Soldados soldadosid = infanteria.getSoldadosid();
-            if (soldadosid != null) {
-                soldadosid = em.getReference(soldadosid.getClass(), soldadosid.getId());
-                infanteria.setSoldadosid(soldadosid);
+            Soldados soldadosidSoldados = infanteria.getSoldadosidSoldados();
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados = em.getReference(soldadosidSoldados.getClass(), soldadosidSoldados.getIdSoldados());
+                infanteria.setSoldadosidSoldados(soldadosidSoldados);
             }
             em.persist(infanteria);
-            if (soldadosid != null) {
-                soldadosid.getInfanteriaList().add(infanteria);
-                soldadosid = em.merge(soldadosid);
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados.getInfanteriaList().add(infanteria);
+                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findInfanteria(infanteria.getIdInfanteria()) != null) {
-                throw new PreexistingEntityException("Infanteria " + infanteria + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -67,20 +61,20 @@ public class InfanteriaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Infanteria persistentInfanteria = em.find(Infanteria.class, infanteria.getIdInfanteria());
-            Soldados soldadosidOld = persistentInfanteria.getSoldadosid();
-            Soldados soldadosidNew = infanteria.getSoldadosid();
-            if (soldadosidNew != null) {
-                soldadosidNew = em.getReference(soldadosidNew.getClass(), soldadosidNew.getId());
-                infanteria.setSoldadosid(soldadosidNew);
+            Soldados soldadosidSoldadosOld = persistentInfanteria.getSoldadosidSoldados();
+            Soldados soldadosidSoldadosNew = infanteria.getSoldadosidSoldados();
+            if (soldadosidSoldadosNew != null) {
+                soldadosidSoldadosNew = em.getReference(soldadosidSoldadosNew.getClass(), soldadosidSoldadosNew.getIdSoldados());
+                infanteria.setSoldadosidSoldados(soldadosidSoldadosNew);
             }
             infanteria = em.merge(infanteria);
-            if (soldadosidOld != null && !soldadosidOld.equals(soldadosidNew)) {
-                soldadosidOld.getInfanteriaList().remove(infanteria);
-                soldadosidOld = em.merge(soldadosidOld);
+            if (soldadosidSoldadosOld != null && !soldadosidSoldadosOld.equals(soldadosidSoldadosNew)) {
+                soldadosidSoldadosOld.getInfanteriaList().remove(infanteria);
+                soldadosidSoldadosOld = em.merge(soldadosidSoldadosOld);
             }
-            if (soldadosidNew != null && !soldadosidNew.equals(soldadosidOld)) {
-                soldadosidNew.getInfanteriaList().add(infanteria);
-                soldadosidNew = em.merge(soldadosidNew);
+            if (soldadosidSoldadosNew != null && !soldadosidSoldadosNew.equals(soldadosidSoldadosOld)) {
+                soldadosidSoldadosNew.getInfanteriaList().add(infanteria);
+                soldadosidSoldadosNew = em.merge(soldadosidSoldadosNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -111,10 +105,10 @@ public class InfanteriaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The infanteria with id " + id + " no longer exists.", enfe);
             }
-            Soldados soldadosid = infanteria.getSoldadosid();
-            if (soldadosid != null) {
-                soldadosid.getInfanteriaList().remove(infanteria);
-                soldadosid = em.merge(soldadosid);
+            Soldados soldadosidSoldados = infanteria.getSoldadosidSoldados();
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados.getInfanteriaList().remove(infanteria);
+                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             em.remove(infanteria);
             em.getTransaction().commit();

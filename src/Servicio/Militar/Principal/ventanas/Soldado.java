@@ -33,7 +33,7 @@ public class Soldado extends javax.swing.JFrame {
 
         for (Soldados s : listasoldado) {
             Vector Fila=new Vector();
-            Fila.addElement(s.getId());
+            Fila.addElement(s.getIdSoldados());
             Fila.addElement(s.getNombre());
             Fila.addElement(s.getApellido());
             Fila.addElement(s.getRango());
@@ -59,7 +59,7 @@ public class Soldado extends javax.swing.JFrame {
 
           for (Soldados s : listasoldado) {
               Vector Fila=new Vector();
-              Fila.addElement(s.getId());
+              Fila.addElement(s.getIdSoldados());
               Fila.addElement(s.getNombre());
               Fila.addElement(s.getApellido());
               Fila.addElement(s.getRango());
@@ -70,7 +70,7 @@ public class Soldado extends javax.swing.JFrame {
     }
     public void cargar() {
         
-        S.setId(Integer.parseInt(this.txtId.getText()));
+        S.setIdSoldados(Integer.parseInt(this.txtId.getText()));
         S.setNombre(this.txtNombre.getText());
         S.setApellido(this.txtApellido.getSelectedText());
         S.setRango(this.comboRango.getSelectedItem().toString());
@@ -80,7 +80,7 @@ public class Soldado extends javax.swing.JFrame {
     public void eliminar(){
         // eliminamos los soldados con el metodo destroy
         try {
-           Soldado.destroy((Integer.parseInt(this.txtId.getText())));
+           Soldado.destroy(Integer.parseInt(txtId.getText()));
            JOptionPane.showMessageDialog(this, "soldado eliminado");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"soldado no se epudo eliminar","error",JOptionPane.WARNING_MESSAGE);
@@ -342,7 +342,7 @@ public class Soldado extends javax.swing.JFrame {
     Soldados S = new Soldados();
     
     //al usuario le innsertamos los datos ingresados en el formulario 
-    S.setId(Id);
+    S.setIdSoldados(Id);
     S.setNombre(nombre);
     S.setApellido(apellido);
     S.setRango(rango);
@@ -384,20 +384,21 @@ public class Soldado extends javax.swing.JFrame {
        SoldadosJpaController tablaSoldados = new SoldadosJpaController(conexion);
           
         try {//al usuario le innsertamos los datos ingresados en el formulario 
-            S.setId(ID);
+            S.setIdSoldados(ID);
             S.setNombre(Nombre);
             S.setApellido(Apellido);
             S.setRango(Rango);
             S.setCedula(Cedula);
             
             tablaSoldados.edit(S);
-            JOptionPane.showMessageDialog(this,"el soldado fue"+S.getId()+" editado");
+            JOptionPane.showMessageDialog(this,"el soldado fue"+S.getIdSoldados()+" editado");
                     
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"el soldado con id:"+S.getId()+"no se púdo editar");
+            JOptionPane.showMessageDialog(this,"el soldado con id:"+S.getIdSoldados()+"no se púdo editar");
         }
                 //al usuario le innsertamos los datos ingresados en el formulario 
-          
+          actualizarTabla();
+          limpiar();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

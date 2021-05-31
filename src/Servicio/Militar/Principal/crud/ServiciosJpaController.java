@@ -5,16 +5,14 @@
  */
 package Servicio.Militar.Principal.crud;
 
-import Servicio.Militar.Principal.crud.exceptions.IllegalOrphanException;
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
-import Servicio.Militar.Principal.crud.exceptions.PreexistingEntityException;
 import Servicio.Militar.Principal.tabla.Servicios;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Servicio.Militar.Principal.tabla.SolicitarServicio;
+import Servicio.Militar.Principal.tabla.Soldados;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -35,36 +33,26 @@ public class ServiciosJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Servicios servicios) throws PreexistingEntityException, Exception {
-        if (servicios.getSolicitarServicioList() == null) {
-            servicios.setSolicitarServicioList(new ArrayList<SolicitarServicio>());
+    public void create(Servicios servicios) {
+        if (servicios.getSoldadosList() == null) {
+            servicios.setSoldadosList(new ArrayList<Soldados>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            List<SolicitarServicio> attachedSolicitarServicioList = new ArrayList<SolicitarServicio>();
-            for (SolicitarServicio solicitarServicioListSolicitarServicioToAttach : servicios.getSolicitarServicioList()) {
-                solicitarServicioListSolicitarServicioToAttach = em.getReference(solicitarServicioListSolicitarServicioToAttach.getClass(), solicitarServicioListSolicitarServicioToAttach.getId());
-                attachedSolicitarServicioList.add(solicitarServicioListSolicitarServicioToAttach);
+            List<Soldados> attachedSoldadosList = new ArrayList<Soldados>();
+            for (Soldados soldadosListSoldadosToAttach : servicios.getSoldadosList()) {
+                soldadosListSoldadosToAttach = em.getReference(soldadosListSoldadosToAttach.getClass(), soldadosListSoldadosToAttach.getIdSoldados());
+                attachedSoldadosList.add(soldadosListSoldadosToAttach);
             }
-            servicios.setSolicitarServicioList(attachedSolicitarServicioList);
+            servicios.setSoldadosList(attachedSoldadosList);
             em.persist(servicios);
-            for (SolicitarServicio solicitarServicioListSolicitarServicio : servicios.getSolicitarServicioList()) {
-                Servicios oldServiciosidServiciosOfSolicitarServicioListSolicitarServicio = solicitarServicioListSolicitarServicio.getServiciosidServicios();
-                solicitarServicioListSolicitarServicio.setServiciosidServicios(servicios);
-                solicitarServicioListSolicitarServicio = em.merge(solicitarServicioListSolicitarServicio);
-                if (oldServiciosidServiciosOfSolicitarServicioListSolicitarServicio != null) {
-                    oldServiciosidServiciosOfSolicitarServicioListSolicitarServicio.getSolicitarServicioList().remove(solicitarServicioListSolicitarServicio);
-                    oldServiciosidServiciosOfSolicitarServicioListSolicitarServicio = em.merge(oldServiciosidServiciosOfSolicitarServicioListSolicitarServicio);
-                }
+            for (Soldados soldadosListSoldados : servicios.getSoldadosList()) {
+                soldadosListSoldados.getServiciosList().add(servicios);
+                soldadosListSoldados = em.merge(soldadosListSoldados);
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findServicios(servicios.getIdServicios()) != null) {
-                throw new PreexistingEntityException("Servicios " + servicios + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -72,43 +60,32 @@ public class ServiciosJpaController implements Serializable {
         }
     }
 
-    public void edit(Servicios servicios) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Servicios servicios) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Servicios persistentServicios = em.find(Servicios.class, servicios.getIdServicios());
-            List<SolicitarServicio> solicitarServicioListOld = persistentServicios.getSolicitarServicioList();
-            List<SolicitarServicio> solicitarServicioListNew = servicios.getSolicitarServicioList();
-            List<String> illegalOrphanMessages = null;
-            for (SolicitarServicio solicitarServicioListOldSolicitarServicio : solicitarServicioListOld) {
-                if (!solicitarServicioListNew.contains(solicitarServicioListOldSolicitarServicio)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain SolicitarServicio " + solicitarServicioListOldSolicitarServicio + " since its serviciosidServicios field is not nullable.");
+            List<Soldados> soldadosListOld = persistentServicios.getSoldadosList();
+            List<Soldados> soldadosListNew = servicios.getSoldadosList();
+            List<Soldados> attachedSoldadosListNew = new ArrayList<Soldados>();
+            for (Soldados soldadosListNewSoldadosToAttach : soldadosListNew) {
+                soldadosListNewSoldadosToAttach = em.getReference(soldadosListNewSoldadosToAttach.getClass(), soldadosListNewSoldadosToAttach.getIdSoldados());
+                attachedSoldadosListNew.add(soldadosListNewSoldadosToAttach);
+            }
+            soldadosListNew = attachedSoldadosListNew;
+            servicios.setSoldadosList(soldadosListNew);
+            servicios = em.merge(servicios);
+            for (Soldados soldadosListOldSoldados : soldadosListOld) {
+                if (!soldadosListNew.contains(soldadosListOldSoldados)) {
+                    soldadosListOldSoldados.getServiciosList().remove(servicios);
+                    soldadosListOldSoldados = em.merge(soldadosListOldSoldados);
                 }
             }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            List<SolicitarServicio> attachedSolicitarServicioListNew = new ArrayList<SolicitarServicio>();
-            for (SolicitarServicio solicitarServicioListNewSolicitarServicioToAttach : solicitarServicioListNew) {
-                solicitarServicioListNewSolicitarServicioToAttach = em.getReference(solicitarServicioListNewSolicitarServicioToAttach.getClass(), solicitarServicioListNewSolicitarServicioToAttach.getId());
-                attachedSolicitarServicioListNew.add(solicitarServicioListNewSolicitarServicioToAttach);
-            }
-            solicitarServicioListNew = attachedSolicitarServicioListNew;
-            servicios.setSolicitarServicioList(solicitarServicioListNew);
-            servicios = em.merge(servicios);
-            for (SolicitarServicio solicitarServicioListNewSolicitarServicio : solicitarServicioListNew) {
-                if (!solicitarServicioListOld.contains(solicitarServicioListNewSolicitarServicio)) {
-                    Servicios oldServiciosidServiciosOfSolicitarServicioListNewSolicitarServicio = solicitarServicioListNewSolicitarServicio.getServiciosidServicios();
-                    solicitarServicioListNewSolicitarServicio.setServiciosidServicios(servicios);
-                    solicitarServicioListNewSolicitarServicio = em.merge(solicitarServicioListNewSolicitarServicio);
-                    if (oldServiciosidServiciosOfSolicitarServicioListNewSolicitarServicio != null && !oldServiciosidServiciosOfSolicitarServicioListNewSolicitarServicio.equals(servicios)) {
-                        oldServiciosidServiciosOfSolicitarServicioListNewSolicitarServicio.getSolicitarServicioList().remove(solicitarServicioListNewSolicitarServicio);
-                        oldServiciosidServiciosOfSolicitarServicioListNewSolicitarServicio = em.merge(oldServiciosidServiciosOfSolicitarServicioListNewSolicitarServicio);
-                    }
+            for (Soldados soldadosListNewSoldados : soldadosListNew) {
+                if (!soldadosListOld.contains(soldadosListNewSoldados)) {
+                    soldadosListNewSoldados.getServiciosList().add(servicios);
+                    soldadosListNewSoldados = em.merge(soldadosListNewSoldados);
                 }
             }
             em.getTransaction().commit();
@@ -128,7 +105,7 @@ public class ServiciosJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -140,16 +117,10 @@ public class ServiciosJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The servicios with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<SolicitarServicio> solicitarServicioListOrphanCheck = servicios.getSolicitarServicioList();
-            for (SolicitarServicio solicitarServicioListOrphanCheckSolicitarServicio : solicitarServicioListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Servicios (" + servicios + ") cannot be destroyed since the SolicitarServicio " + solicitarServicioListOrphanCheckSolicitarServicio + " in its solicitarServicioList field has a non-nullable serviciosidServicios field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
+            List<Soldados> soldadosList = servicios.getSoldadosList();
+            for (Soldados soldadosListSoldados : soldadosList) {
+                soldadosListSoldados.getServiciosList().remove(servicios);
+                soldadosListSoldados = em.merge(soldadosListSoldados);
             }
             em.remove(servicios);
             em.getTransaction().commit();

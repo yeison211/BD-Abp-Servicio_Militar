@@ -6,7 +6,6 @@
 package Servicio.Militar.Principal.crud;
 
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
-import Servicio.Militar.Principal.crud.exceptions.PreexistingEntityException;
 import Servicio.Militar.Principal.tabla.Armada;
 import java.io.Serializable;
 import javax.persistence.Query;
@@ -33,27 +32,22 @@ public class ArmadaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Armada armada) throws PreexistingEntityException, Exception {
+    public void create(Armada armada) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Soldados soldadosid = armada.getSoldadosid();
-            if (soldadosid != null) {
-                soldadosid = em.getReference(soldadosid.getClass(), soldadosid.getId());
-                armada.setSoldadosid(soldadosid);
+            Soldados soldadosidSoldados = armada.getSoldadosidSoldados();
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados = em.getReference(soldadosidSoldados.getClass(), soldadosidSoldados.getIdSoldados());
+                armada.setSoldadosidSoldados(soldadosidSoldados);
             }
             em.persist(armada);
-            if (soldadosid != null) {
-                soldadosid.getArmadaList().add(armada);
-                soldadosid = em.merge(soldadosid);
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados.getArmadaList().add(armada);
+                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findArmada(armada.getIdArmada()) != null) {
-                throw new PreexistingEntityException("Armada " + armada + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -67,20 +61,20 @@ public class ArmadaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Armada persistentArmada = em.find(Armada.class, armada.getIdArmada());
-            Soldados soldadosidOld = persistentArmada.getSoldadosid();
-            Soldados soldadosidNew = armada.getSoldadosid();
-            if (soldadosidNew != null) {
-                soldadosidNew = em.getReference(soldadosidNew.getClass(), soldadosidNew.getId());
-                armada.setSoldadosid(soldadosidNew);
+            Soldados soldadosidSoldadosOld = persistentArmada.getSoldadosidSoldados();
+            Soldados soldadosidSoldadosNew = armada.getSoldadosidSoldados();
+            if (soldadosidSoldadosNew != null) {
+                soldadosidSoldadosNew = em.getReference(soldadosidSoldadosNew.getClass(), soldadosidSoldadosNew.getIdSoldados());
+                armada.setSoldadosidSoldados(soldadosidSoldadosNew);
             }
             armada = em.merge(armada);
-            if (soldadosidOld != null && !soldadosidOld.equals(soldadosidNew)) {
-                soldadosidOld.getArmadaList().remove(armada);
-                soldadosidOld = em.merge(soldadosidOld);
+            if (soldadosidSoldadosOld != null && !soldadosidSoldadosOld.equals(soldadosidSoldadosNew)) {
+                soldadosidSoldadosOld.getArmadaList().remove(armada);
+                soldadosidSoldadosOld = em.merge(soldadosidSoldadosOld);
             }
-            if (soldadosidNew != null && !soldadosidNew.equals(soldadosidOld)) {
-                soldadosidNew.getArmadaList().add(armada);
-                soldadosidNew = em.merge(soldadosidNew);
+            if (soldadosidSoldadosNew != null && !soldadosidSoldadosNew.equals(soldadosidSoldadosOld)) {
+                soldadosidSoldadosNew.getArmadaList().add(armada);
+                soldadosidSoldadosNew = em.merge(soldadosidSoldadosNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -111,10 +105,10 @@ public class ArmadaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The armada with id " + id + " no longer exists.", enfe);
             }
-            Soldados soldadosid = armada.getSoldadosid();
-            if (soldadosid != null) {
-                soldadosid.getArmadaList().remove(armada);
-                soldadosid = em.merge(soldadosid);
+            Soldados soldadosidSoldados = armada.getSoldadosidSoldados();
+            if (soldadosidSoldados != null) {
+                soldadosidSoldados.getArmadaList().remove(armada);
+                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             em.remove(armada);
             em.getTransaction().commit();

@@ -6,7 +6,6 @@
 package Servicio.Militar.Principal.crud;
 
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
-import Servicio.Militar.Principal.crud.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -33,7 +32,7 @@ public class CuartelesJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Cuarteles cuarteles) throws PreexistingEntityException, Exception {
+    public void create(Cuarteles cuarteles) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,11 +48,6 @@ public class CuartelesJpaController implements Serializable {
                 compañiaidCompañia = em.merge(compañiaidCompañia);
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findCuarteles(cuarteles.getIdCuarteles()) != null) {
-                throw new PreexistingEntityException("Cuarteles " + cuarteles + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();

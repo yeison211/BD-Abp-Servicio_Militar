@@ -10,57 +10,65 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
+@Table(catalog = "bd_abp_desarrollo_de_software", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Soldados.findAll", query = "SELECT s FROM Soldados s")
-    , @NamedQuery(name = "Soldados.findById", query = "SELECT s FROM Soldados s WHERE s.id = :id")
+    , @NamedQuery(name = "Soldados.findByIdSoldados", query = "SELECT s FROM Soldados s WHERE s.idSoldados = :idSoldados")
     , @NamedQuery(name = "Soldados.findByNombre", query = "SELECT s FROM Soldados s WHERE s.nombre = :nombre")
     , @NamedQuery(name = "Soldados.findByApellido", query = "SELECT s FROM Soldados s WHERE s.apellido = :apellido")
     , @NamedQuery(name = "Soldados.findByCedula", query = "SELECT s FROM Soldados s WHERE s.cedula = :cedula")
-    , @NamedQuery(name = "Soldados.findByRango", query = "SELECT s FROM Soldados s WHERE s.rango = :rango")})
+    , @NamedQuery(name = "Soldados.findByRango", query = "SELECT s FROM Soldados s WHERE s.rango = :rango")
+    , @NamedQuery(name = "Soldados.findBySoldadoscol", query = "SELECT s FROM Soldados s WHERE s.soldadoscol = :soldadoscol")})
 public class Soldados implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    private Integer id;
+    private Integer idSoldados;
     private String nombre;
     private String apellido;
     private String cedula;
     private String rango;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosid")
-    private List<SolicitarServicio> solicitarServicioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosid")
+    private String soldadoscol;
+    @ManyToMany(mappedBy = "soldadosList")
+    private List<Servicios> serviciosList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosidSoldados")
     private List<Compañia> compañiaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosidSoldados")
     private List<Infanteria> infanteriaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosidSoldados")
     private List<Artilleria> artilleriaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "soldadosidSoldados")
     private List<Armada> armadaList;
 
     public Soldados() {
     }
 
-    public Soldados(Integer id) {
-        this.id = id;
+    public Soldados(Integer idSoldados) {
+        this.idSoldados = idSoldados;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdSoldados() {
+        return idSoldados;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdSoldados(Integer idSoldados) {
+        this.idSoldados = idSoldados;
     }
 
     public String getNombre() {
@@ -95,12 +103,20 @@ public class Soldados implements Serializable {
         this.rango = rango;
     }
 
-    public List<SolicitarServicio> getSolicitarServicioList() {
-        return solicitarServicioList;
+    public String getSoldadoscol() {
+        return soldadoscol;
     }
 
-    public void setSolicitarServicioList(List<SolicitarServicio> solicitarServicioList) {
-        this.solicitarServicioList = solicitarServicioList;
+    public void setSoldadoscol(String soldadoscol) {
+        this.soldadoscol = soldadoscol;
+    }
+
+    public List<Servicios> getServiciosList() {
+        return serviciosList;
+    }
+
+    public void setServiciosList(List<Servicios> serviciosList) {
+        this.serviciosList = serviciosList;
     }
 
     public List<Compañia> getCompañiaList() {
@@ -138,7 +154,7 @@ public class Soldados implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (idSoldados != null ? idSoldados.hashCode() : 0);
         return hash;
     }
 
@@ -149,7 +165,7 @@ public class Soldados implements Serializable {
             return false;
         }
         Soldados other = (Soldados) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.idSoldados == null && other.idSoldados != null) || (this.idSoldados != null && !this.idSoldados.equals(other.idSoldados))) {
             return false;
         }
         return true;
@@ -157,7 +173,7 @@ public class Soldados implements Serializable {
 
     @Override
     public String toString() {
-        return "Servicio.Militar.Principal.tabla.Soldados[ id=" + id + " ]";
+        return "Servicio.Militar.Principal.tabla.Soldados[ idSoldados=" + idSoldados + " ]";
     }
     
 }

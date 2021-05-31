@@ -8,32 +8,35 @@ package Servicio.Militar.Principal.tabla;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
+@Table(catalog = "bd_abp_desarrollo_de_software", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Cuarteles.findAll", query = "SELECT c FROM Cuarteles c")
     , @NamedQuery(name = "Cuarteles.findByIdCuarteles", query = "SELECT c FROM Cuarteles c WHERE c.idCuarteles = :idCuarteles")
     , @NamedQuery(name = "Cuarteles.findByNombre", query = "SELECT c FROM Cuarteles c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Cuarteles.findByUbicacion", query = "SELECT c FROM Cuarteles c WHERE c.ubicacion = :ubicacion")
-    , @NamedQuery(name = "Cuarteles.findByCuartelescol", query = "SELECT c FROM Cuarteles c WHERE c.cuartelescol = :cuartelescol")})
+    , @NamedQuery(name = "Cuarteles.findByUbicacion", query = "SELECT c FROM Cuarteles c WHERE c.ubicacion = :ubicacion")})
 public class Cuarteles implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer idCuarteles;
     private String nombre;
     private String ubicacion;
-    private String cuartelescol;
     @JoinColumn(name = "Compa\u00f1ia_idCompa\u00f1ia", referencedColumnName = "idCompa\u00f1ia")
     @ManyToOne(optional = false)
     private Compañia compañiaidCompañia;
@@ -67,14 +70,6 @@ public class Cuarteles implements Serializable {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-
-    public String getCuartelescol() {
-        return cuartelescol;
-    }
-
-    public void setCuartelescol(String cuartelescol) {
-        this.cuartelescol = cuartelescol;
     }
 
     public Compañia getCompañiaidCompañia() {

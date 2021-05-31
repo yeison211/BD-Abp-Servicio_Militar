@@ -6,7 +6,6 @@ import Servicio.Militar.Principal.crud.SoldadosJpaController;
 import Servicio.Militar.Principal.tabla.Soldados;
 import Servicio.Militar.Principal.tabla.Armada;
 import Servicio.Militar.Principal.tabla.Armada_;
-import static Servicio.Militar.Principal.tabla.Armada_.soldadosid;
 import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManagerFactory;
@@ -44,7 +43,7 @@ public class armada extends javax.swing.JFrame {
 
           for (Soldados s : listasoldado) {
               Vector Fila=new Vector();
-              Fila.addElement(s.getId());
+              Fila.addElement(s.getIdSoldados());
               Fila.addElement(s.getNombre());
               Fila.addElement(s.getApellido());
               Fila.addElement(s.getRango());
@@ -70,7 +69,7 @@ public class armada extends javax.swing.JFrame {
           for (Armada A : listaArmada) {
               Vector Fila=new Vector();
               Fila.addElement(A.getIdArmada());
-              Fila.addElement(A.getSoldadosid());
+              Fila.addElement(A.getSoldadosidSoldados());
              
               Table.addRow(Fila);
           }
@@ -303,7 +302,7 @@ public class armada extends javax.swing.JFrame {
     
     // se realiza la conversion
     Integer Id=Integer.parseInt(ID);
-    Integer SoldadoID=Integer.parseInt();
+//    Integer SoldadoID=Integer.parseInt();
     // creamos la conexion con la base de datos
     EntityManagerFactory conexion=Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
     
@@ -312,7 +311,7 @@ public class armada extends javax.swing.JFrame {
     
     //al usuario le innsertamos los datos ingresados en el formulario 
     A.setIdArmada(Id);
-    A.setSoldadosid();
+    //A.setSoldadosid();
     
    
     

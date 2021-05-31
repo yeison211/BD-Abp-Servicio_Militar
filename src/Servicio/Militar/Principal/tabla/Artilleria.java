@@ -8,17 +8,21 @@ package Servicio.Militar.Principal.tabla;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
  * @author PC
  */
 @Entity
+@Table(catalog = "bd_abp_desarrollo_de_software", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Artilleria.findAll", query = "SELECT a FROM Artilleria a")
     , @NamedQuery(name = "Artilleria.findByIdArtilleria", query = "SELECT a FROM Artilleria a WHERE a.idArtilleria = :idArtilleria")})
@@ -26,11 +30,12 @@ public class Artilleria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer idArtilleria;
-    @JoinColumn(name = "Soldados_id", referencedColumnName = "id")
+    @JoinColumn(name = "Soldados_idSoldados", referencedColumnName = "idSoldados")
     @ManyToOne(optional = false)
-    private Soldados soldadosid;
+    private Soldados soldadosidSoldados;
 
     public Artilleria() {
     }
@@ -47,12 +52,12 @@ public class Artilleria implements Serializable {
         this.idArtilleria = idArtilleria;
     }
 
-    public Soldados getSoldadosid() {
-        return soldadosid;
+    public Soldados getSoldadosidSoldados() {
+        return soldadosidSoldados;
     }
 
-    public void setSoldadosid(Soldados soldadosid) {
-        this.soldadosid = soldadosid;
+    public void setSoldadosidSoldados(Soldados soldadosidSoldados) {
+        this.soldadosidSoldados = soldadosidSoldados;
     }
 
     @Override

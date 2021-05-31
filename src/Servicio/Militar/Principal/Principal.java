@@ -6,6 +6,7 @@
 package Servicio.Militar.Principal;
 
 import Servicio.Militar.Principal.ventanas.VentanaPrincipal;
+import static java.awt.Frame.MAXIMIZED_BOTH;
 
 /**
  *
@@ -17,8 +18,8 @@ public class Principal {
        miVentana.setVisible(true);
        miVentana.setLocationRelativeTo(null);
        miVentana.setResizable(false);  
+       miVentana.setExtendedState(MAXIMIZED_BOTH);
     }
    
-               
-    
+          
 }

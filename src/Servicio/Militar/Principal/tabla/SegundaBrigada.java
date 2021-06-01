@@ -7,6 +7,7 @@ package Servicio.Militar.Principal.tabla;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,41 +21,42 @@ import javax.persistence.Table;
  * @author PC
  */
 @Entity
-@Table(catalog = "bd_abp_final", schema = "")
+@Table(name = "segunda_brigada", catalog = "bd_abp_final", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Armada.findAll", query = "SELECT a FROM Armada a")
-    , @NamedQuery(name = "Armada.findByIdArmada", query = "SELECT a FROM Armada a WHERE a.idArmada = :idArmada")
-    , @NamedQuery(name = "Armada.findByIdSoldado", query = "SELECT a FROM Armada a WHERE a.idSoldado = :idSoldado")
-    , @NamedQuery(name = "Armada.findByNombre", query = "SELECT a FROM Armada a WHERE a.nombre = :nombre")
-    , @NamedQuery(name = "Armada.findByApellido", query = "SELECT a FROM Armada a WHERE a.apellido = :apellido")
-    , @NamedQuery(name = "Armada.findByCedula", query = "SELECT a FROM Armada a WHERE a.cedula = :cedula")
-    , @NamedQuery(name = "Armada.findByRango", query = "SELECT a FROM Armada a WHERE a.rango = :rango")})
-public class Armada implements Serializable {
+    @NamedQuery(name = "SegundaBrigada.findAll", query = "SELECT s FROM SegundaBrigada s")
+    , @NamedQuery(name = "SegundaBrigada.findByIdSegundaBrigada", query = "SELECT s FROM SegundaBrigada s WHERE s.idSegundaBrigada = :idSegundaBrigada")
+    , @NamedQuery(name = "SegundaBrigada.findByIdSoldado", query = "SELECT s FROM SegundaBrigada s WHERE s.idSoldado = :idSoldado")
+    , @NamedQuery(name = "SegundaBrigada.findByNombre", query = "SELECT s FROM SegundaBrigada s WHERE s.nombre = :nombre")
+    , @NamedQuery(name = "SegundaBrigada.findByApellido", query = "SELECT s FROM SegundaBrigada s WHERE s.apellido = :apellido")
+    , @NamedQuery(name = "SegundaBrigada.findByCedula", query = "SELECT s FROM SegundaBrigada s WHERE s.cedula = :cedula")
+    , @NamedQuery(name = "SegundaBrigada.findByRango", query = "SELECT s FROM SegundaBrigada s WHERE s.rango = :rango")})
+public class SegundaBrigada implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    private Integer idArmada;
+    @Column(name = "idSegunda_Brigada")
+    private Integer idSegundaBrigada;
     private String idSoldado;
     private String nombre;
     private String apellido;
     private String cedula;
     private String rango;
 
-    public Armada() {
+    public SegundaBrigada() {
     }
 
-    public Armada(Integer idArmada) {
-        this.idArmada = idArmada;
+    public SegundaBrigada(Integer idSegundaBrigada) {
+        this.idSegundaBrigada = idSegundaBrigada;
     }
 
-    public Integer getIdArmada() {
-        return idArmada;
+    public Integer getIdSegundaBrigada() {
+        return idSegundaBrigada;
     }
 
-    public void setIdArmada(Integer idArmada) {
-        this.idArmada = idArmada;
+    public void setIdSegundaBrigada(Integer idSegundaBrigada) {
+        this.idSegundaBrigada = idSegundaBrigada;
     }
 
     public String getIdSoldado() {
@@ -100,18 +102,18 @@ public class Armada implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idArmada != null ? idArmada.hashCode() : 0);
+        hash += (idSegundaBrigada != null ? idSegundaBrigada.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Armada)) {
+        if (!(object instanceof SegundaBrigada)) {
             return false;
         }
-        Armada other = (Armada) object;
-        if ((this.idArmada == null && other.idArmada != null) || (this.idArmada != null && !this.idArmada.equals(other.idArmada))) {
+        SegundaBrigada other = (SegundaBrigada) object;
+        if ((this.idSegundaBrigada == null && other.idSegundaBrigada != null) || (this.idSegundaBrigada != null && !this.idSegundaBrigada.equals(other.idSegundaBrigada))) {
             return false;
         }
         return true;
@@ -119,7 +121,7 @@ public class Armada implements Serializable {
 
     @Override
     public String toString() {
-        return "Servicio.Militar.Principal.tabla.Armada[ idArmada=" + idArmada + " ]";
+        return "Servicio.Militar.Principal.tabla.SegundaBrigada[ idSegundaBrigada=" + idSegundaBrigada + " ]";
     }
     
 }

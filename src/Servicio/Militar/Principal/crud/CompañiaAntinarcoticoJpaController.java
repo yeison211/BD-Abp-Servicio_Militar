@@ -6,7 +6,7 @@
 package Servicio.Militar.Principal.crud;
 
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
-import Servicio.Militar.Principal.tabla.Infanteria;
+import Servicio.Militar.Principal.tabla.CompañiaAntinarcotico;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author PC
  */
-public class InfanteriaJpaController implements Serializable {
+public class CompañiaAntinarcoticoJpaController implements Serializable {
 
-    public InfanteriaJpaController(EntityManagerFactory emf) {
+    public CompañiaAntinarcoticoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,12 +31,12 @@ public class InfanteriaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Infanteria infanteria) {
+    public void create(CompañiaAntinarcotico compañiaAntinarcotico) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(infanteria);
+            em.persist(compañiaAntinarcotico);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,19 +45,19 @@ public class InfanteriaJpaController implements Serializable {
         }
     }
 
-    public void edit(Infanteria infanteria) throws NonexistentEntityException, Exception {
+    public void edit(CompañiaAntinarcotico compañiaAntinarcotico) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            infanteria = em.merge(infanteria);
+            compañiaAntinarcotico = em.merge(compañiaAntinarcotico);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = infanteria.getIdInfanteria();
-                if (findInfanteria(id) == null) {
-                    throw new NonexistentEntityException("The infanteria with id " + id + " no longer exists.");
+                Integer id = compañiaAntinarcotico.getIdCompañoaAntinarcotico();
+                if (findCompañiaAntinarcotico(id) == null) {
+                    throw new NonexistentEntityException("The compa\u00f1iaAntinarcotico with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -73,14 +73,14 @@ public class InfanteriaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Infanteria infanteria;
+            CompañiaAntinarcotico compañiaAntinarcotico;
             try {
-                infanteria = em.getReference(Infanteria.class, id);
-                infanteria.getIdInfanteria();
+                compañiaAntinarcotico = em.getReference(CompañiaAntinarcotico.class, id);
+                compañiaAntinarcotico.getIdCompañoaAntinarcotico();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The infanteria with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The compa\u00f1iaAntinarcotico with id " + id + " no longer exists.", enfe);
             }
-            em.remove(infanteria);
+            em.remove(compañiaAntinarcotico);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -89,19 +89,19 @@ public class InfanteriaJpaController implements Serializable {
         }
     }
 
-    public List<Infanteria> findInfanteriaEntities() {
-        return findInfanteriaEntities(true, -1, -1);
+    public List<CompañiaAntinarcotico> findCompañiaAntinarcoticoEntities() {
+        return findCompañiaAntinarcoticoEntities(true, -1, -1);
     }
 
-    public List<Infanteria> findInfanteriaEntities(int maxResults, int firstResult) {
-        return findInfanteriaEntities(false, maxResults, firstResult);
+    public List<CompañiaAntinarcotico> findCompañiaAntinarcoticoEntities(int maxResults, int firstResult) {
+        return findCompañiaAntinarcoticoEntities(false, maxResults, firstResult);
     }
 
-    private List<Infanteria> findInfanteriaEntities(boolean all, int maxResults, int firstResult) {
+    private List<CompañiaAntinarcotico> findCompañiaAntinarcoticoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Infanteria.class));
+            cq.select(cq.from(CompañiaAntinarcotico.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -113,20 +113,20 @@ public class InfanteriaJpaController implements Serializable {
         }
     }
 
-    public Infanteria findInfanteria(Integer id) {
+    public CompañiaAntinarcotico findCompañiaAntinarcotico(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Infanteria.class, id);
+            return em.find(CompañiaAntinarcotico.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getInfanteriaCount() {
+    public int getCompañiaAntinarcoticoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Infanteria> rt = cq.from(Infanteria.class);
+            Root<CompañiaAntinarcotico> rt = cq.from(CompañiaAntinarcotico.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

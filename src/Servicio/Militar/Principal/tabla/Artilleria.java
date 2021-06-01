@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -22,10 +20,15 @@ import javax.persistence.Table;
  * @author PC
  */
 @Entity
-@Table(catalog = "bd_abp_desarrollo_de_software", schema = "")
+@Table(catalog = "bd_abp_final", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Artilleria.findAll", query = "SELECT a FROM Artilleria a")
-    , @NamedQuery(name = "Artilleria.findByIdArtilleria", query = "SELECT a FROM Artilleria a WHERE a.idArtilleria = :idArtilleria")})
+    , @NamedQuery(name = "Artilleria.findByIdArtilleria", query = "SELECT a FROM Artilleria a WHERE a.idArtilleria = :idArtilleria")
+    , @NamedQuery(name = "Artilleria.findByIdSoldado", query = "SELECT a FROM Artilleria a WHERE a.idSoldado = :idSoldado")
+    , @NamedQuery(name = "Artilleria.findByNombre", query = "SELECT a FROM Artilleria a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Artilleria.findByApellido", query = "SELECT a FROM Artilleria a WHERE a.apellido = :apellido")
+    , @NamedQuery(name = "Artilleria.findByCedula", query = "SELECT a FROM Artilleria a WHERE a.cedula = :cedula")
+    , @NamedQuery(name = "Artilleria.findByRango", query = "SELECT a FROM Artilleria a WHERE a.rango = :rango")})
 public class Artilleria implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,9 +36,11 @@ public class Artilleria implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer idArtilleria;
-    @JoinColumn(name = "Soldados_idSoldados", referencedColumnName = "idSoldados")
-    @ManyToOne(optional = false)
-    private Soldados soldadosidSoldados;
+    private String idSoldado;
+    private String nombre;
+    private String apellido;
+    private String cedula;
+    private String rango;
 
     public Artilleria() {
     }
@@ -52,12 +57,44 @@ public class Artilleria implements Serializable {
         this.idArtilleria = idArtilleria;
     }
 
-    public Soldados getSoldadosidSoldados() {
-        return soldadosidSoldados;
+    public String getIdSoldado() {
+        return idSoldado;
     }
 
-    public void setSoldadosidSoldados(Soldados soldadosidSoldados) {
-        this.soldadosidSoldados = soldadosidSoldados;
+    public void setIdSoldado(String idSoldado) {
+        this.idSoldado = idSoldado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    public String getRango() {
+        return rango;
+    }
+
+    public void setRango(String rango) {
+        this.rango = rango;
     }
 
     @Override

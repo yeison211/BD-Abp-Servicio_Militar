@@ -8,14 +8,13 @@ package Servicio.Militar.Principal.crud;
 import Servicio.Militar.Principal.crud.exceptions.NonexistentEntityException;
 import Servicio.Militar.Principal.tabla.Artilleria;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Servicio.Militar.Principal.tabla.Soldados;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -37,16 +36,7 @@ public class ArtilleriaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Soldados soldadosidSoldados = artilleria.getSoldadosidSoldados();
-            if (soldadosidSoldados != null) {
-                soldadosidSoldados = em.getReference(soldadosidSoldados.getClass(), soldadosidSoldados.getIdSoldados());
-                artilleria.setSoldadosidSoldados(soldadosidSoldados);
-            }
             em.persist(artilleria);
-            if (soldadosidSoldados != null) {
-                soldadosidSoldados.getArtilleriaList().add(artilleria);
-                soldadosidSoldados = em.merge(soldadosidSoldados);
-            }
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -60,22 +50,7 @@ public class ArtilleriaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Artilleria persistentArtilleria = em.find(Artilleria.class, artilleria.getIdArtilleria());
-            Soldados soldadosidSoldadosOld = persistentArtilleria.getSoldadosidSoldados();
-            Soldados soldadosidSoldadosNew = artilleria.getSoldadosidSoldados();
-            if (soldadosidSoldadosNew != null) {
-                soldadosidSoldadosNew = em.getReference(soldadosidSoldadosNew.getClass(), soldadosidSoldadosNew.getIdSoldados());
-                artilleria.setSoldadosidSoldados(soldadosidSoldadosNew);
-            }
             artilleria = em.merge(artilleria);
-            if (soldadosidSoldadosOld != null && !soldadosidSoldadosOld.equals(soldadosidSoldadosNew)) {
-                soldadosidSoldadosOld.getArtilleriaList().remove(artilleria);
-                soldadosidSoldadosOld = em.merge(soldadosidSoldadosOld);
-            }
-            if (soldadosidSoldadosNew != null && !soldadosidSoldadosNew.equals(soldadosidSoldadosOld)) {
-                soldadosidSoldadosNew.getArtilleriaList().add(artilleria);
-                soldadosidSoldadosNew = em.merge(soldadosidSoldadosNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -104,11 +79,6 @@ public class ArtilleriaJpaController implements Serializable {
                 artilleria.getIdArtilleria();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The artilleria with id " + id + " no longer exists.", enfe);
-            }
-            Soldados soldadosidSoldados = artilleria.getSoldadosidSoldados();
-            if (soldadosidSoldados != null) {
-                soldadosidSoldados.getArtilleriaList().remove(artilleria);
-                soldadosidSoldados = em.merge(soldadosidSoldados);
             }
             em.remove(artilleria);
             em.getTransaction().commit();

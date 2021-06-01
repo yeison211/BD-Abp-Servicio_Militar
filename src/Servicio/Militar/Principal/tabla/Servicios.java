@@ -6,15 +6,10 @@
 package Servicio.Militar.Principal.tabla;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -24,84 +19,71 @@ import javax.persistence.Table;
  * @author PC
  */
 @Entity
-@Table(catalog = "bd_abp_desarrollo_de_software", schema = "")
+@Table(catalog = "bd_abp_final", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Servicios.findAll", query = "SELECT s FROM Servicios s")
     , @NamedQuery(name = "Servicios.findByIdServicios", query = "SELECT s FROM Servicios s WHERE s.idServicios = :idServicios")
-    , @NamedQuery(name = "Servicios.findByGuardia", query = "SELECT s FROM Servicios s WHERE s.guardia = :guardia")
-    , @NamedQuery(name = "Servicios.findByImaginaria", query = "SELECT s FROM Servicios s WHERE s.imaginaria = :imaginaria")
-    , @NamedQuery(name = "Servicios.findByCuarteleros", query = "SELECT s FROM Servicios s WHERE s.cuarteleros = :cuarteleros")
-    , @NamedQuery(name = "Servicios.findByFechaDeRealizacion", query = "SELECT s FROM Servicios s WHERE s.fechaDeRealizacion = :fechaDeRealizacion")})
+    , @NamedQuery(name = "Servicios.findByNombre", query = "SELECT s FROM Servicios s WHERE s.nombre = :nombre")
+    , @NamedQuery(name = "Servicios.findByApellido", query = "SELECT s FROM Servicios s WHERE s.apellido = :apellido")
+    , @NamedQuery(name = "Servicios.findByCedula", query = "SELECT s FROM Servicios s WHERE s.cedula = :cedula")
+    , @NamedQuery(name = "Servicios.findByOpcionservicio", query = "SELECT s FROM Servicios s WHERE s.opcionservicio = :opcionservicio")})
 public class Servicios implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    private Integer idServicios;
-    private String guardia;
-    private String imaginaria;
-    private String cuarteleros;
-    private String fechaDeRealizacion;
-    @JoinTable(name = "soliciatar_servicios", joinColumns = {
-        @JoinColumn(name = "Servicios_idServicios", referencedColumnName = "idServicios")}, inverseJoinColumns = {
-        @JoinColumn(name = "Soldados_idSoldados", referencedColumnName = "idSoldados")})
-    @ManyToMany
-    private List<Soldados> soldadosList;
+    private String idServicios;
+    private String nombre;
+    private String apellido;
+    private String cedula;
+    @Column(name = "Opcion_servicio")
+    private String opcionservicio;
 
     public Servicios() {
     }
 
-    public Servicios(Integer idServicios) {
+    public Servicios(String idServicios) {
         this.idServicios = idServicios;
     }
 
-    public Integer getIdServicios() {
+    public String getIdServicios() {
         return idServicios;
     }
 
-    public void setIdServicios(Integer idServicios) {
+    public void setIdServicios(String idServicios) {
         this.idServicios = idServicios;
     }
 
-    public String getGuardia() {
-        return guardia;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setGuardia(String guardia) {
-        this.guardia = guardia;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getImaginaria() {
-        return imaginaria;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setImaginaria(String imaginaria) {
-        this.imaginaria = imaginaria;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getCuarteleros() {
-        return cuarteleros;
+    public String getCedula() {
+        return cedula;
     }
 
-    public void setCuarteleros(String cuarteleros) {
-        this.cuarteleros = cuarteleros;
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
-    public String getFechaDeRealizacion() {
-        return fechaDeRealizacion;
+    public String getOpcionservicio() {
+        return opcionservicio;
     }
 
-    public void setFechaDeRealizacion(String fechaDeRealizacion) {
-        this.fechaDeRealizacion = fechaDeRealizacion;
-    }
-
-    public List<Soldados> getSoldadosList() {
-        return soldadosList;
-    }
-
-    public void setSoldadosList(List<Soldados> soldadosList) {
-        this.soldadosList = soldadosList;
+    public void setOpcionservicio(String opcionservicio) {
+        this.opcionservicio = opcionservicio;
     }
 
     @Override

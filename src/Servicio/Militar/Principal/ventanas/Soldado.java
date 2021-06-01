@@ -70,7 +70,7 @@ public class Soldado extends javax.swing.JFrame {
     }
     public void cargar() {
         
-        S.setIdSoldados(Integer.parseInt(this.txtId.getText()));
+        S.setIdSoldados(this.txtId.getText());
         S.setNombre(this.txtNombre.getText());
         S.setApellido(this.txtApellido.getSelectedText());
         S.setRango(this.comboRango.getSelectedItem().toString());
@@ -80,7 +80,7 @@ public class Soldado extends javax.swing.JFrame {
     public void eliminar(){
         // eliminamos los soldados con el metodo destroy
         try {
-           Soldado.destroy(Integer.parseInt(txtId.getText()));
+           Soldado.destroy(txtId.getText());
            JOptionPane.showMessageDialog(this, "soldado eliminado");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,"soldado no se epudo eliminar","error",JOptionPane.WARNING_MESSAGE);
@@ -333,7 +333,7 @@ public class Soldado extends javax.swing.JFrame {
     
     
     // se realiza la conversion
-    Integer Id=Integer.parseInt(ID);
+    
     
     // creamos la conexion con la base de datos
     EntityManagerFactory conexion=Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
@@ -342,7 +342,7 @@ public class Soldado extends javax.swing.JFrame {
     Soldados S = new Soldados();
     
     //al usuario le innsertamos los datos ingresados en el formulario 
-    S.setIdSoldados(Id);
+    S.setIdSoldados(ID);
     S.setNombre(nombre);
     S.setApellido(apellido);
     S.setRango(rango);
@@ -374,17 +374,15 @@ public class Soldado extends javax.swing.JFrame {
         String Rango=comboRango.getSelectedItem().toString();
         String Cedula=txtcedula.getText();
         // se realiza la conversion
-        Integer ID =Integer.parseInt(Id);
+       
        // Integer cc=Integer.parseInt(cedula);
-        
-        
         // creamos la conexion con la base de datos
        EntityManagerFactory conexion =Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
         //creamos una instancia de la clase contoller 
        SoldadosJpaController tablaSoldados = new SoldadosJpaController(conexion);
           
         try {//al usuario le innsertamos los datos ingresados en el formulario 
-            S.setIdSoldados(ID);
+            S.setIdSoldados(Id);
             S.setNombre(Nombre);
             S.setApellido(Apellido);
             S.setRango(Rango);

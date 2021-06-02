@@ -18,7 +18,6 @@ import Servicio.Militar.Principal.crud.TerceraBrigadaJpaController;
 import Servicio.Militar.Principal.tabla.Soldados;
 import java.util.List;
 import java.util.Properties;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
@@ -32,7 +31,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Servicio.Militar.Principal.ventanas.Soldado;
 
 
 public class Reporte extends javax.swing.JFrame {
@@ -41,12 +39,12 @@ public class Reporte extends javax.swing.JFrame {
     
     public Reporte() {
         initComponents();
-        this.setLocationRelativeTo(this);
+        this.setLocationRelativeTo(null);
     }
     public void actualizarTablasoldado()
      {
         //se realiza la conexion ala base de datos
-        EntityManagerFactory conexion=Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
+        EntityManagerFactory conexion = Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
         //creamos una  instancia de la clase controller
         SoldadosJpaController tablasoldado= new SoldadosJpaController(conexion);
         //creamos una lista de soldados

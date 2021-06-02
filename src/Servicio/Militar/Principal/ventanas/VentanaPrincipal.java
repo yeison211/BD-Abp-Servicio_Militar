@@ -1,6 +1,13 @@
 
 package Servicio.Militar.Principal.ventanas;
 
+import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -38,8 +45,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         menuServicio = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        menuReporte = new javax.swing.JMenu();
+        itemGenerarReporte = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -170,19 +177,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuServicio);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/email.enviar.png"))); // NOI18N
-        jMenu1.setText("Reporte");
+        menuReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/email.enviar.png"))); // NOI18N
+        menuReporte.setText("Reporte");
 
-        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/gmail.png"))); // NOI18N
-        jMenuItem10.setText("Generar Reporte");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        itemGenerarReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/gmail.png"))); // NOI18N
+        itemGenerarReporte.setText("Generar Reporte");
+        itemGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                itemGenerarReporteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem10);
+        menuReporte.add(itemGenerarReporte);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuReporte);
 
         setJMenuBar(jMenuBar1);
 
@@ -262,9 +269,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        new servicios().setVisible(true);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void itemGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGenerarReporteActionPerformed
         new Reporte().setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_itemGenerarReporteActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -294,20 +301,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try {
+                    UIManager.setLookAndFeel(new AluminiumLookAndFeel());
+                } catch (UnsupportedLookAndFeelException ex) {
+                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+               }
                 new VentanaPrincipal().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemGenerarReporte;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -321,6 +332,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuCuarteles;
     private javax.swing.JMenu menuCuenta;
     private javax.swing.JMenu menuCuerpoEjercito;
+    private javax.swing.JMenu menuReporte;
     private javax.swing.JMenu menuServicio;
     private javax.swing.JMenu menuSoldado;
     // End of variables declaration//GEN-END:variables

@@ -5,7 +5,6 @@ import Servicio.Militar.Principal.crud.ArmadaJpaController;
 import Servicio.Militar.Principal.crud.SoldadosJpaController;
 import Servicio.Militar.Principal.tabla.Soldados;
 import Servicio.Militar.Principal.tabla.Armada;
-import Servicio.Militar.Principal.tabla.Armada_;
 import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManagerFactory;

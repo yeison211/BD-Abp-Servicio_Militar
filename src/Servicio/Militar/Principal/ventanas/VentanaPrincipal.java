@@ -92,7 +92,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuCuarteles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/tienda.png"))); // NOI18N
         menuCuarteles.setText("Cuarteles");
 
-        jMenuItem2.setText("GAULA");
+        jMenuItem2.setText("Escuela  Naval");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
@@ -100,7 +100,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         menuCuarteles.add(jMenuItem2);
 
-        jMenuItem5.setText("GOUES");
+        jMenuItem5.setText("Batallon Operativo");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -108,7 +108,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         menuCuarteles.add(jMenuItem5);
 
-        jMenuItem6.setText("FUDRA");
+        jMenuItem6.setText("Batallon De Comando");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -170,8 +170,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuServicio);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/email.enviar.png"))); // NOI18N
         jMenu1.setText("Reporte");
 
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/gmail.png"))); // NOI18N
         jMenuItem10.setText("Generar Reporte");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +263,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-      new Reporte().setVisible(true);
+        new Reporte().setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     public static void main(String args[]) {

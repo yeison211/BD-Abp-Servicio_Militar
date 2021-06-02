@@ -443,7 +443,7 @@
           <Color blue="0" green="99" red="33" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Fuerza De Despliegue Rapido  - FUDRA "/>
+        <Property name="text" type="java.lang.String" value="Batallon de Comando Y Apoyo de Im 6"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>

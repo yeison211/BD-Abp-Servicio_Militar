@@ -59,11 +59,11 @@ public class tercera_Brogada extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<TerceraBrigada>listaTerceraBrigada = tablasTerceraBrigada.findTerceraBrigadaEntities();
         if(listaTerceraBrigada==null || listaTerceraBrigada.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de AFudra Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Batallon de Comando Basia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
-        String Titulo[]={"IdFudra","IdSoldado","Nombre","Apellido","Rango","Cedula"};
+        String Titulo[]={"IdBatallon de Comando","IdSoldado","Nombre","Apellido","Rango","Cedula"};
         Table.setColumnIdentifiers(Titulo);
 
           for (TerceraBrigada A : listaTerceraBrigada) {
@@ -91,9 +91,9 @@ public class tercera_Brogada extends javax.swing.JFrame {
         // eliminamos los soldados con el metodo destroy
         try {
            TerceraBrigada.destroy(Integer.parseInt(this.txtIdFudra.getText()));
-           JOptionPane.showMessageDialog(this, "soldado eliminado de la tabla Fudra");
+           JOptionPane.showMessageDialog(this, "soldado eliminado de el Batallon de Comando");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"soldado no se epudo eliminar de la tabla Fudra","error",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"soldado no se epudo eliminar de el Batallon de Comando","error",JOptionPane.WARNING_MESSAGE);
         }
         limpiar();
      }
@@ -368,7 +368,7 @@ public class tercera_Brogada extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(51, 153, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Fuerza De Despliegue Rapido  - FUDRA ");
+        jLabel1.setText("Batallon de Comando Y Apoyo de Im 6");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -445,9 +445,9 @@ public class tercera_Brogada extends javax.swing.JFrame {
            //obtenemos el total de usuario que se encuentrea en la base de datos
           int total=tablaTerceraBrigada.getTerceraBrigadaCount();
           
-          JOptionPane.showMessageDialog(this, "soldado Guardado En la Tabla Fudra  "+ total);
+          JOptionPane.showMessageDialog(this, "soldado Guardado En el Batallon de Comando  "+ total);
         } catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "soldado No se Pudo Guardar En La Tabla Fudra ");
+               JOptionPane.showMessageDialog(this, "soldado No se Pudo Guardar En el Batallon de Comando ");
         }
      ActualizarTablaTerceraBrigada();
      limpiar(); 

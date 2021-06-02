@@ -59,11 +59,11 @@ public class primera_Brigada extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<PrimeraBrigada>listaPrimeraBrigada = tablasPrimeraBrigada.findPrimeraBrigadaEntities();
         if(listaPrimeraBrigada==null || listaPrimeraBrigada.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Gaula Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Escuela Nava Basia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
-        String Titulo[]={"IdGaula","IdSoldado","Nombre","Apellido","Rango","Cedula"};
+        String Titulo[]={"IdEscuela Nava","IdSoldado","Nombre","Apellido","Rango","Cedula"};
         Table.setColumnIdentifiers(Titulo);
 
           for (PrimeraBrigada A : listaPrimeraBrigada) {
@@ -91,9 +91,9 @@ public class primera_Brigada extends javax.swing.JFrame {
         // eliminamos los soldados con el metodo destroy
         try {
            PrimeraBrigada.destroy(Integer.parseInt(this.txtIdGaula.getText()));
-           JOptionPane.showMessageDialog(this, "soldado eliminado de la tabla Gaula");
+           JOptionPane.showMessageDialog(this, "soldado eliminado de la Escuela Nava");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"soldado no se epudo eliminar de la tabla Gaula","error",JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this,"soldado no se epudo eliminar de la Escuela Nava","error",JOptionPane.WARNING_MESSAGE);
         }
         limpiar();
      }
@@ -165,7 +165,7 @@ public class primera_Brigada extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)), "Gaula"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 153)), "Escuela Naval Almirante padilla"));
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -218,7 +218,7 @@ public class primera_Brigada extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("ID Gaula:");
+        jLabel1.setText("ID Escuela Nava:");
 
         jLabel2.setText("ID Soldado:");
 
@@ -338,7 +338,7 @@ public class primera_Brigada extends javax.swing.JFrame {
 
         jLabel7.setBackground(new java.awt.Color(0, 153, 153));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("Gaula Militar ");
+        jLabel7.setText("Escuela Naval De Cadete Almirante Padilla");
         jLabel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -402,17 +402,17 @@ public class primera_Brigada extends javax.swing.JFrame {
         A.setCedula(cedula);
  
     //creamos una instancia de la clase contoller 
-     PrimeraBrigadaJpaController tablaTerceraBrigada = new PrimeraBrigadaJpaController(conexion);
+     PrimeraBrigadaJpaController tablaPrimeraBrigada = new PrimeraBrigadaJpaController(conexion);
     
         try {
             // insertamos usuario 
-           tablaTerceraBrigada.create(A);
+           tablaPrimeraBrigada.create(A);
            //obtenemos el total de usuario que se encuentrea en la base de datos
-          int total=tablaTerceraBrigada.getPrimeraBrigadaCount();
+          int total=tablaPrimeraBrigada.getPrimeraBrigadaCount();
           
-          JOptionPane.showMessageDialog(this, "soldado Guardado En la Tabla Gaula  " + total);
+          JOptionPane.showMessageDialog(this, "soldado Guardado En la Escuela Nava  " + total);
         } catch (Exception e) {
-               JOptionPane.showMessageDialog(this, "soldado No se Pudo Guardar En La Tabla Gaula ");
+               JOptionPane.showMessageDialog(this, "soldado No se Pudo Guardar En La Escuela Nava");
         }
      ActualizarTablaPrimeraBrigada();
      limpiar(); 

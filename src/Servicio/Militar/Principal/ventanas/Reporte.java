@@ -5,7 +5,16 @@
  */
 package Servicio.Militar.Principal.ventanas;
 
+import Servicio.Militar.Principal.crud.ArmadaJpaController;
+import Servicio.Militar.Principal.crud.ArtilleriaJpaController;
+import Servicio.Militar.Principal.crud.CompañiaAntinarcoticoJpaController;
+import Servicio.Militar.Principal.crud.CompañiaRescateJpaController;
+import Servicio.Militar.Principal.crud.InfanteriaJpaController;
+import Servicio.Militar.Principal.crud.PrimeraBrigadaJpaController;
+import Servicio.Militar.Principal.crud.SegundaBrigadaJpaController;
+import Servicio.Militar.Principal.crud.ServiciosJpaController;
 import Servicio.Militar.Principal.crud.SoldadosJpaController;
+import Servicio.Militar.Principal.crud.TerceraBrigadaJpaController;
 import Servicio.Militar.Principal.tabla.Soldados;
 import java.util.List;
 import java.util.Properties;
@@ -141,7 +150,34 @@ public class Reporte extends javax.swing.JFrame {
      EntityManagerFactory conexion=Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
      SoldadosJpaController tablaSoldado = new SoldadosJpaController(conexion);
      int total=tablaSoldado.getSoldadosCount();
+     
+     ArmadaJpaController tablaArmada = new ArmadaJpaController(conexion);
+     int totaA=tablaArmada.getArmadaCount();
+     
+     ArtilleriaJpaController tablaArtilleria = new  ArtilleriaJpaController(conexion);
+     int totaART=tablaArtilleria.getArtilleriaCount();
+     
+     InfanteriaJpaController tablaInfanteria = new  InfanteriaJpaController(conexion);
+     int totaInt=tablaInfanteria.getInfanteriaCount();
+     
+     PrimeraBrigadaJpaController tablaPrimeraBrigada = new PrimeraBrigadaJpaController(conexion);
+     int totalES=tablaPrimeraBrigada.getPrimeraBrigadaCount();
     
+     CompañiaAntinarcoticoJpaController tablaCompañiaAntinarcotico = new CompañiaAntinarcoticoJpaController(conexion);
+     int totalAnt=tablaCompañiaAntinarcotico.getCompañiaAntinarcoticoCount();
+     
+     ServiciosJpaController tablaServicios = new ServiciosJpaController(conexion);
+     int totalServ=tablaServicios.getServiciosCount();
+     
+     SegundaBrigadaJpaController tablaSegundaBrigada = new SegundaBrigadaJpaController(conexion);
+      int totalBaOP=tablaSegundaBrigada.getSegundaBrigadaCount();
+      
+      CompañiaRescateJpaController tablaCompañiaRescate = new CompañiaRescateJpaController(conexion);
+      int totalREsca=tablaCompañiaRescate.getCompañiaRescateCount();
+      
+       TerceraBrigadaJpaController tablaTerceraBrigada = new TerceraBrigadaJpaController(conexion);
+       int totalBaCOO=tablaTerceraBrigada.getTerceraBrigadaCount();
+     
         try {
         Properties Propiedad = new Properties();
        // String host="localhost";
@@ -157,9 +193,27 @@ public class Reporte extends javax.swing.JFrame {
      String contraseña="Emprendedorbv2020";
      String destinatario=txtCorreo.getText();
      String asunto=txtAsunto.getText();
-     String Mensaje = txtMensaje.getText()+"el numero de soldado registrado es de "+ total ;
+     String Mensaje = txtMensaje.getText()+"el numero de soldado registrado es de :" + total+ "  "+
+              "Soldados Registrado en la Armada : "+ totaA + "     "+""
+             + "Soldados Registrado en Artilleria : " + totaART + "   "
+             +"Soldados Registraedo en Infanteria : "+ totaInt + "                                                                                                                                                                                                                                                                                   "
+             + "|------------------------Cuarlteles--------------------------|"
+             +"   "+
+             "|--------------------------Compañias------------------------------|"+"   "+
+             "|-------------------------Servicio-----------------------|"+"                      "+
+             " Soldados Registrados en la Escuela Naval : "+totalES+"   |  "+
+             "Soldados Registrados en la Compañia AntiNarcoticos : "+totalAnt+"   |  "+
+             "Numero de Soldado Que prestan Servicios "+totalServ+"   |  "+
+             "Soldados Registados en el Batallon Operativo : "+totalBaOP+"  |  "+
+             "Soldados Registrados en la Compañia De Rescate : "+totalREsca+"   |  "+
+             "Numero de Soldado Que prestan Servicios "+totalServ+"  |         "+
+             "Soldados Registrado en el BAtallon De Comando : "+totalBaCOO+"  |  "+           
+             "                                                                                                                                                                                                   "+""+
+             "                                                                                                                                                                                                                                                         "+""
+             +"Datos de EJERCITO NACIONAL "; 
     
      
+                                                                                                                                                                                                                                                                  
      MimeMessage mail= new MimeMessage(sesion);
      
         

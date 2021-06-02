@@ -39,7 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         menuSoldado = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itemIngresarSoldado = new javax.swing.JMenuItem();
         menuCompañia = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
@@ -133,13 +133,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Ingresar Soldado");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itemIngresarSoldado.setText("Ingresar Soldado");
+        itemIngresarSoldado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itemIngresarSoldadoActionPerformed(evt);
             }
         });
-        menuSoldado.add(jMenuItem1);
+        menuSoldado.add(itemIngresarSoldado);
 
         jMenuBar1.add(menuSoldado);
 
@@ -225,9 +225,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
        
     }//GEN-LAST:event_menuSoldadoActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void itemIngresarSoldadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemIngresarSoldadoActionPerformed
       new Soldado().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_itemIngresarSoldadoActionPerformed
 
     private void menuCuerpoEjercitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCuerpoEjercitoActionPerformed
         // TODO add your handling code here:
@@ -313,12 +313,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemGenerarReporte;
+    private javax.swing.JMenuItem itemIngresarSoldado;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

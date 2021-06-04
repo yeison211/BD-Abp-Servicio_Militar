@@ -23,8 +23,8 @@ public class infanteria extends javax.swing.JFrame {
     public infanteria() {
         initComponents();
         this.setLocationRelativeTo(this);
-        actualizarTablasoldado();
-        ActualizarTablaInfanteria();
+        //actualizarTablasoldado();
+        //ActualizarTablaInfanteria();
         
     }
     public void actualizarTablasoldado()
@@ -36,7 +36,7 @@ public class infanteria extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Soldados>listasoldado = tablasoldado.findSoldadosEntities();
         if(listasoldado==null || listasoldado.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Soldado Basia");
+            //JOptionPane.showMessageDialog(this, "Lista de Soldado Basia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
@@ -133,7 +133,7 @@ public class infanteria extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)), "Tabla Soldado"));
 

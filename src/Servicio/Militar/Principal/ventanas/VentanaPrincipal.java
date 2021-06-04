@@ -27,13 +27,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuCuenta = new javax.swing.JMenu();
         menuCuerpoEjercito = new javax.swing.JMenu();
-        menuArmada = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        itemArmada = new javax.swing.JMenuItem();
+        itemArtilleria = new javax.swing.JMenuItem();
+        itemInfanteria = new javax.swing.JMenuItem();
         menuCuarteles = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -56,8 +55,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/127.jpg"))); // NOI18N
 
-        jButton1.setText("jButton1");
-
         menuCuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/policia.png"))); // NOI18N
         menuCuenta.setText("Cuenta");
         jMenuBar1.add(menuCuenta);
@@ -70,29 +67,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        menuArmada.setText("Armada");
-        menuArmada.addActionListener(new java.awt.event.ActionListener() {
+        itemArmada.setText("Armada");
+        itemArmada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuArmadaActionPerformed(evt);
+                itemArmadaActionPerformed(evt);
             }
         });
-        menuCuerpoEjercito.add(menuArmada);
+        menuCuerpoEjercito.add(itemArmada);
 
-        jMenuItem3.setText("Artilleria");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        itemArtilleria.setText("Artilleria");
+        itemArtilleria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                itemArtilleriaActionPerformed(evt);
             }
         });
-        menuCuerpoEjercito.add(jMenuItem3);
+        menuCuerpoEjercito.add(itemArtilleria);
 
-        jMenuItem4.setText("Infanteria");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        itemInfanteria.setText("Infanteria");
+        itemInfanteria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                itemInfanteriaActionPerformed(evt);
             }
         });
-        menuCuerpoEjercito.add(jMenuItem4);
+        menuCuerpoEjercito.add(itemInfanteria);
 
         jMenuBar1.add(menuCuerpoEjercito);
 
@@ -233,17 +230,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuCuerpoEjercitoActionPerformed
 
-    private void menuArmadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArmadaActionPerformed
+    private void itemArmadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArmadaActionPerformed
       new armada().setVisible(true);
-    }//GEN-LAST:event_menuArmadaActionPerformed
+    }//GEN-LAST:event_itemArmadaActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void itemInfanteriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemInfanteriaActionPerformed
      new infanteria().setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_itemInfanteriaActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void itemArtilleriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemArtilleriaActionPerformed
     new artilleria().setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_itemArtilleriaActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
     new tercera_Brogada().setVisible(true);
@@ -312,22 +309,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemArmada;
+    private javax.swing.JMenuItem itemArtilleria;
     private javax.swing.JMenuItem itemGenerarReporte;
+    private javax.swing.JMenuItem itemInfanteria;
     private javax.swing.JMenuItem itemIngresarSoldado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JMenuItem menuArmada;
     private javax.swing.JMenu menuCompañia;
     private javax.swing.JMenu menuCuarteles;
     private javax.swing.JMenu menuCuenta;

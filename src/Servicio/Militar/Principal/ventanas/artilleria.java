@@ -59,7 +59,7 @@ public class artilleria extends javax.swing.JFrame {
         
         List<Artilleria>listaArtilleria=tablasArtilleria.findArtilleriaEntities();
         if(listaArtilleria==null || listaArtilleria.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Artilleria Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Artilleria vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

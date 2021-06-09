@@ -32,7 +32,7 @@ public class CompañiaAntinarcoticos extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Soldados>listasoldado = tablasoldado.findSoldadosEntities();
         if(listasoldado==null || listasoldado.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Soldado Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Soldado vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
@@ -57,7 +57,7 @@ public class CompañiaAntinarcoticos extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<CompañiaAntinarcotico>listaCompañiaAntinarcotico = tablasCompañiaAntinarcotico.findCompañiaAntinarcoticoEntities();
         if(listaCompañiaAntinarcotico==null || listaCompañiaAntinarcotico.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Antinarcoticos Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Antinarcoticos vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

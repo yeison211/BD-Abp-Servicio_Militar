@@ -38,7 +38,7 @@ public class compañiaRescate extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Soldados>listasoldado = tablasoldado.findSoldadosEntities();
         if(listasoldado==null || listasoldado.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Soldado Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Soldado vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
@@ -63,7 +63,7 @@ public class compañiaRescate extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<CompañiaRescate>listaCompañiaRescate = tablasCompañiaRescate.findCompañiaRescateEntities();
         if(listaCompañiaRescate==null || listaCompañiaRescate.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Compañia de Rescate esta  Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Compañia de Rescate esta  vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

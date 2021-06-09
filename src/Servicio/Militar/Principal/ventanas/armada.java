@@ -60,7 +60,7 @@ public class armada extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Armada>listaArmada = tablasArmada.findArmadaEntities();
         if(listaArmada==null || listaArmada.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Armada Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Armada vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

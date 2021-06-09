@@ -34,7 +34,7 @@ public class primera_Brigada extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Soldados>listasoldado = tablasoldado.findSoldadosEntities();
         if(listasoldado==null || listasoldado.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Soldado Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Soldado vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
@@ -59,7 +59,7 @@ public class primera_Brigada extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<PrimeraBrigada>listaPrimeraBrigada = tablasPrimeraBrigada.findPrimeraBrigadaEntities();
         if(listaPrimeraBrigada==null || listaPrimeraBrigada.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Escuela Nava Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Escuela Nava vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

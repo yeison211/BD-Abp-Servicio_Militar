@@ -34,7 +34,7 @@ public class servicios extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Soldados>listasoldado = tablasoldado.findSoldadosEntities();
         if(listasoldado==null || listasoldado.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Soldado Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Soldado vacias");
 //            this.dispose();
         }
         Table =new DefaultTableModel();
@@ -59,7 +59,7 @@ public class servicios extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Servicios>listaServicios = tablasServicios.findServiciosEntities();
         if(listaServicios==null || listaServicios.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Servicios Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Servicios vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

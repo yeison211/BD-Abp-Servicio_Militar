@@ -61,7 +61,7 @@ public class infanteria extends javax.swing.JFrame {
         //creamos una lista de soldados
         List<Infanteria>listaInfanteria = tablasInfanteria.findInfanteriaEntities();
         if(listaInfanteria==null || listaInfanteria.isEmpty() ){
-            JOptionPane.showMessageDialog(this, "Lista de Infanteria Basia");
+            JOptionPane.showMessageDialog(this, "Lista de Infanteria vacia");
 //            this.dispose();
         }
         Table =new DefaultTableModel();

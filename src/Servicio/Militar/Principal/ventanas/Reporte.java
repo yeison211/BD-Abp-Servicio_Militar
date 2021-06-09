@@ -31,6 +31,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.commons.validator.EmailValidator;
 
 
 public class Reporte extends javax.swing.JFrame {
@@ -40,6 +41,9 @@ public class Reporte extends javax.swing.JFrame {
     public Reporte() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        etiInvalido.setVisible(false);
+        btnEnviar.setEnabled(false);
     }
     public void actualizarTablasoldado()
      {
@@ -66,6 +70,7 @@ public class Reporte extends javax.swing.JFrame {
         btnEnviar = new javax.swing.JButton();
         txtMensaje = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        etiInvalido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Reportes");
@@ -78,9 +83,15 @@ public class Reporte extends javax.swing.JFrame {
         jLabel1.setText("Generar Reporte de Soldados ");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255), 2));
 
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyReleased(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/gmail.png"))); // NOI18N
-        jLabel3.setText(" Correo  Destinatario: ");
+        jLabel3.setText("EMAIL (*)");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Asunto:");
@@ -92,14 +103,11 @@ public class Reporte extends javax.swing.JFrame {
             }
         });
 
-        txtMensaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMensajeActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Mensaje:");
+
+        etiInvalido.setForeground(new java.awt.Color(255, 51, 51));
+        etiInvalido.setText("EMAIL INVÁLIDO(*)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +121,10 @@ public class Reporte extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(etiInvalido, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)))
                         .addGap(40, 40, 40))
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -129,7 +140,9 @@ public class Reporte extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(etiInvalido))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -144,6 +157,8 @@ public class Reporte extends javax.swing.JFrame {
                 .addComponent(btnEnviar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
+
+        btnEnviar.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,6 +198,7 @@ public class Reporte extends javax.swing.JFrame {
         try {
         Properties Propiedad = new Properties();
        // String host="localhost";
+       
      
      Propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
      Propiedad.setProperty("mail.smtp.starttls.enable", "true");
@@ -239,9 +255,15 @@ public class Reporte extends javax.swing.JFrame {
      
     }//GEN-LAST:event_btnEnviarActionPerformed
 
-    private void txtMensajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMensajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMensajeActionPerformed
+    private void txtCorreoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyReleased
+        if(EmailValidator.getInstance().isValid(txtCorreo.getText())){
+            etiInvalido.setVisible(false);
+            btnEnviar.setEnabled(true);
+        } else {
+            etiInvalido.setVisible(true);
+            btnEnviar.setEnabled(false);
+        }
+    }//GEN-LAST:event_txtCorreoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -280,6 +302,7 @@ public class Reporte extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
+    private javax.swing.JLabel etiInvalido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

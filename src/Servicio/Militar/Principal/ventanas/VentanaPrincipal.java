@@ -4,9 +4,9 @@ package Servicio.Militar.Principal.ventanas;
 import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 
 
 public class VentanaPrincipal extends javax.swing.JFrame {
@@ -14,7 +14,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
   
     public VentanaPrincipal() {
         initComponents();
-        this.setExtendedState(MAXIMIZED_BOTH); 
+        this.setExtendedState(MAXIMIZED_BOTH);
+        
+        //CAMBIAR ICONO DE LA VENTANA
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/IconoPrincipal.png")).getImage());
+        }catch(Exception e){
+            
+        }
+        
         
     }
     

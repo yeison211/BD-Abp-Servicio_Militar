@@ -23,8 +23,8 @@ public class armada extends javax.swing.JFrame {
         initComponents();
         actualizarTablasoldado();
         this.setLocationRelativeTo(null);
-        //ActualizarTablaArmada();
-        //actualizarTablasoldado();
+        ActualizarTablaArmada();
+        actualizarTablasoldado();
     }
      public void actualizarTablasoldado()
      {

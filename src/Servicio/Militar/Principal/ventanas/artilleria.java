@@ -22,8 +22,8 @@ public class artilleria extends javax.swing.JFrame {
     public artilleria() {
         initComponents();
         this.setLocationRelativeTo(this);
-        //ActualizarTablaArtilleria();
-        //actualizarTablasoldado();
+        ActualizarTablaArtilleria();
+        actualizarTablasoldado();
     }
       public void actualizarTablasoldado()
      {

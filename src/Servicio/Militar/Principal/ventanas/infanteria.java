@@ -23,8 +23,8 @@ public class infanteria extends javax.swing.JFrame {
     public infanteria() {
         initComponents();
         this.setLocationRelativeTo(this);
-        //actualizarTablasoldado();
-        //ActualizarTablaInfanteria();
+        actualizarTablasoldado();
+        ActualizarTablaInfanteria();
         
     }
     public void actualizarTablasoldado()

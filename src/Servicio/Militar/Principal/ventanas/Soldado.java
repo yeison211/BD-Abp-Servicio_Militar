@@ -22,6 +22,8 @@ public class Soldado extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         this.setResizable(false);
+        actualizarTabla();
+        
 
         EntityManagerFactory conexion = Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
         SoldadosJpaController tablaSoldado = new SoldadosJpaController(conexion);

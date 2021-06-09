@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +24,14 @@ public class CompañiaAntinarcoticos extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         ActualizarTablaCompañiaAntinarcotico();
         actualizarTablasoldado();
-    }public void actualizarTablasoldado()
+        //CAMBIAR ICONO DE LA VENTANA
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/IconoPrincipal.png")).getImage());
+        }catch(Exception e){
+            
+        }
+    }
+    public void actualizarTablasoldado()
      {
         //se realiza la conexion ala base de datos
         EntityManagerFactory conexion=Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");

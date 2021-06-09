@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +25,12 @@ public class Soldado extends javax.swing.JFrame {
         this.setResizable(false);
         actualizarTabla();
         
+        //CAMBIAR ICONO DE LA VENTANA
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/IconoPrincipal.png")).getImage());
+        }catch(Exception e){
+            
+        }
 
         EntityManagerFactory conexion = Persistence.createEntityManagerFactory("ABP_Servicio_MilitarPU");
         SoldadosJpaController tablaSoldado = new SoldadosJpaController(conexion);

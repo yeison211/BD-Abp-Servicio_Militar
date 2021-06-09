@@ -29,6 +29,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.validator.EmailValidator;
@@ -44,6 +45,12 @@ public class Reporte extends javax.swing.JFrame {
         
         etiInvalido.setVisible(false);
         btnEnviar.setEnabled(false);
+        //CAMBIAR ICONO DE LA VENTANA
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/IconoPrincipal.png")).getImage());
+        }catch(Exception e){
+            
+        }
     }
     public void actualizarTablasoldado()
      {

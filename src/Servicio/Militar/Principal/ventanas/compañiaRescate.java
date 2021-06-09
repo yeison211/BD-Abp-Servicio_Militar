@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +27,12 @@ public class compañiaRescate extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         ActualizarTablaCompañiaRescate();
         actualizarTablasoldado();
-        
+        //CAMBIAR ICONO DE LA VENTANA
+        try{
+            setIconImage(new ImageIcon(getClass().getResource("/Servicio/Militar/Principal/ventanas/imagenes/IconoPrincipal.png")).getImage());
+        }catch(Exception e){
+            
+        }
         
     }
      public void actualizarTablasoldado()
